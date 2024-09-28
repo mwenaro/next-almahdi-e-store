@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,  useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface CarouselProps {
@@ -18,12 +18,12 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
   };
 
   // Function to handle previous slide
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     setDirection(-1); // Set direction to left
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
-  };
+  },[setCurrentIndex, setDirection])
 
   // Auto slide every 30 seconds
   useEffect(() => {

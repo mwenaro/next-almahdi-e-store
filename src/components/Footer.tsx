@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 export const Footer = () => {
@@ -12,10 +13,12 @@ export const Footer = () => {
       >
         <a href="#">
           <span>
-            <img
+            <Image
               src="/assets/ALMAHDI LOGO.png"
               alt="Almahdi Logo"
               className="w-[10vw] brightness-0 invert"
+              width={100}
+              height={100}
             />
           </span>
         </a>

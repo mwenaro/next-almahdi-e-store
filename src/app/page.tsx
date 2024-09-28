@@ -2,11 +2,7 @@
 import React from "react";
 
 import Header from "@/components/pages/Header";
-import Carousel from "@/components/pages/Carousel";
-import Carousel3 from "@/components/pages/Carousel3";
-import Category from "@/components/pages/Category";
-import { categories } from "./data/category-data";
-import Image from "next/image";
+
 import ProductsSection from "@/components/pages/ProductsSection";
 import CategorySection from "@/components/pages/CategorySection3";
 import Carousel2 from "@/components/pages/Carousel2";
@@ -41,11 +37,11 @@ const HomePage: React.FC = () => {
             </div>
           </div>
         </div> */}
-          {/* Categoty Section */}
-          <CategorySection />
+        {/* Categoty Section */}
+        <CategorySection />
 
-          {/* products */}
-          <ProductsSection />
+        {/* products */}
+        <ProductsSection />
       </main>
     </div>
   );

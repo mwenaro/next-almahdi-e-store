@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -17,17 +17,17 @@ const Carousel2: React.FC<CarouselProps> = ({ images }) => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     setDirection(-1);
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
-  };
+  }, [setCurrentIndex, setDirection])
 
   useEffect(() => {
     const interval = setInterval(handleNext, 30000);
     return () => clearInterval(interval);
-  }, [currentIndex,handleNext]);
+  }, [currentIndex]);
 
   const variants = {
     enter: (direction: number) => ({
