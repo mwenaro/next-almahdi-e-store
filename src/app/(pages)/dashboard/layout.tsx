@@ -7,8 +7,8 @@ import { Toaster } from '@/components/ui/toaster';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Next Shadcn Dashboard Starter',
-  description: 'Basic dashboard with Next.js and Shadcn'
+  title: 'Almahdi Dashboard',
+  description: 'The official Ecommerce Basic dashboard '
 };
 
 export default  function DashboardLayout({

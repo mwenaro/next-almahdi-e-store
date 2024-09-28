@@ -8,7 +8,8 @@ export type User = {
   verified: boolean;
   status: string;
 };
-export const users: User[] = [
+export const users: User[] = []
+const newUser = [
   {
     id: 1,
     name: 'Candice Schiner',
@@ -118,33 +119,51 @@ export const navItems: NavItem[] = [
     label: 'Dashboard'
   },
   {
-    title: 'User',
-    href: '/dashboard/user',
+    title: 'Category',
+    href: '/dashboard/category',
     icon: 'user',
-    label: 'user'
+    label: 'category'
   },
   {
-    title: 'Employee',
-    href: '/dashboard/employee',
-    icon: 'employee',
-    label: 'employee'
+    title: 'SubCategory',
+    href: '/dashboard/sub-category',
+    icon: 'user',
+    label: 'sub-category'
   },
+  {
+    title: 'Product',
+    href: '/dashboard/user',
+    icon: 'user',
+    label: 'product'
+  },
+  // {
+  //   title: 'User',
+  //   href: '/dashboard/user',
+  //   icon: 'user',
+  //   label: 'user'
+  // },
+  // {
+  //   title: 'Employee',
+  //   href: '/dashboard/employee',
+  //   icon: 'employee',
+  //   label: 'employee'
+  // },
   {
     title: 'Profile',
     href: '/dashboard/profile',
     icon: 'profile',
     label: 'profile'
   },
-  {
-    title: 'Kanban',
-    href: '/dashboard/kanban',
-    icon: 'kanban',
-    label: 'kanban'
-  },
-  {
-    title: 'Login',
-    href: '/',
-    icon: 'login',
-    label: 'login'
-  }
+  // {
+  //   title: 'Kanban',
+  //   href: '/dashboard/kanban',
+  //   icon: 'kanban',
+  //   label: 'kanban'
+  // },
+  // {
+  //   title: 'Login',
+  //   href: '/',
+  //   icon: 'login',
+  //   label: 'login'
+  // }
 ];
