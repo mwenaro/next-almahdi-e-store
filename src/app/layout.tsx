@@ -1,3 +1,4 @@
+import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 import { cn } from "@/lib/utils";
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         )}
       >
         {children}
+        <Footer />
       </body>
     </html>
   );
