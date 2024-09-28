@@ -1,33 +1,34 @@
-import { productService } from "@/contollers/ProductService";
 import { NextRequest, NextResponse } from "next/server";
 import { IQuery } from "../../types";
+import { SubCategory } from "@/models/SubCategory";
 
-//GET  api/product/slug
+//GET  api/sub-category/slug
 export async function GET(req: NextRequest, { params: { slug } }: IQuery) {
   try {
-    const fetchedProduct = await productService.getById(slug);
-    if (!fetchedProduct)
+    const fetchedSubCategory = await SubCategory.findById(slug);
+    if (!fetchedSubCategory)
       return NextResponse.json(
         { sucess: false, message: "Not Found" },
         { status: 404 }
       );
-    return NextResponse.json({ sucess: true, data: fetchedProduct });
+
+    return NextResponse.json({ sucess: true, data: fetchedSubCategory });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
-//POST /api/product/slug
+//POST /api/sub-category/slug
 export async function PUT(req: NextRequest, { params: { slug } }: IQuery) {
   try {
     const body = await req.json();
-    const updatedProduct = await productService.update(slug, body);
-    if (!updatedProduct)
+    const updatedSubCategory = await SubCategory.findByIdAndUpdate(slug, body);
+    if (!updatedSubCategory)
       return NextResponse.json(
-        { sucess: false, message: "Could not update product" },
+        { sucess: false, message: "Could not update Subcategory" },
         { status: 400 }
       );
 
-    return NextResponse.json({ sucess: true, data: updatedProduct });
+    return NextResponse.json({ sucess: true, data: updatedSubCategory });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
@@ -35,14 +36,14 @@ export async function PUT(req: NextRequest, { params: { slug } }: IQuery) {
 
 export async function DELETE(req: NextRequest, { params: { slug } }: IQuery) {
   try {
-    const deletedProduct = await productService.getById(slug);
-    if (!deletedProduct)
+    const deletedSubCategory = await SubCategory.findByIdAndDelete(slug);
+    if (!deletedSubCategory)
       return NextResponse.json(
         { sucess: false, message: "Not Found" },
         { status: 404 }
       );
 
-    return NextResponse.json({ sucess: true, data: deletedProduct });
+    return NextResponse.json({ sucess: true, data: deletedSubCategory });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
