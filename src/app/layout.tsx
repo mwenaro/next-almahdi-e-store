@@ -14,9 +14,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           "min-h-screen bg-background font-sans antialiased ",
           
         )}
-      >
+      ><div className="min-h-screen">
         {children}
         <Footer />
+        </div>
       </body>
     </html>
   );
