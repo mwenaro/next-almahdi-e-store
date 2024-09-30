@@ -18,8 +18,9 @@ export async function GET(req: NextRequest) {
 }
 //POST /api/category
 export async function POST(req: NextRequest) {
+  const body = await req.json();
+  return NextResponse.json({body})
   try {
-    const body = await req.json();
     const newCategory = await Category.insertMany(
       Array.isArray(body) ? body : [body]
     );
