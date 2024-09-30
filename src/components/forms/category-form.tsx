@@ -83,7 +83,6 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
       router.refresh();
       router.push(`/dashboard/categories`);
       toast({
-        variant: "default",
         title: "Success",
         description: "Category Successfully created",
       });
