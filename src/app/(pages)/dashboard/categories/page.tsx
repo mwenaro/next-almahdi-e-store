@@ -5,7 +5,7 @@ import { Category } from '@/models/Category';
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/dashboard' },
-  { title: 'Categorries', link: '/dashboard/categories' }
+  { title: 'Categories', link: '/dashboard/categories' }
 ];
 export default async function page() {
   const data = await Category.find()

@@ -1,4 +1,5 @@
 "use client";
+import axios from 'axios'
 import * as z from "zod";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -63,7 +64,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
     ? initialData
     : {
         name: "",
-        active: false
+        active: ""
       };
 
   const form = useForm<CategoryFormValues>({
@@ -77,15 +78,14 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
       if (initialData) {
         // await axios.post(`/api/category/edit-category/${initialData._id}`, data);
       } else {
-        // const res = await axios.post(`/api/category/create-category`, data);
-        // console.log("category", res);
+        const res = await axios.post(`/api/category`, data);
       }
       router.refresh();
       router.push(`/dashboard/categories`);
       toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
+        variant: "default",
+        title: "Success",
+        description: "Category Successfully created",
       });
     } catch (error: any) {
       toast({
@@ -183,8 +183,8 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
                     <SelectContent>
                       {/* @ts-ignore  */}
                       {categories.map((category) => (
-                        <SelectItem key={category.key} value={category._key}>
-                          {category.value}
+                        <SelectItem key={category._id} value={category._id}>
+                          {category.name}
                         </SelectItem>
                       ))}
                     </SelectContent>
