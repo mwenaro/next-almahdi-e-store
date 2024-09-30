@@ -15,7 +15,7 @@ const getSubCategories = async () => {
   // const res = await axios.get(`${process.env.NEXTAUTH_URL!}/api/sub-category`)
   // console.log(res.data.data)
   // if(!res?.data?.length) return []
-  return (await res.data.data) || [];
+  return await res?.data?.data || [];
 };
 
 const breadcrumbItems = [
