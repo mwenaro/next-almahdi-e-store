@@ -60,6 +60,7 @@ type ProductFormValues = z.infer<typeof formSchema>;
 interface ProductFormProps {
   initialData: any | null;
   categories: any;
+  // subCategories:any
 }
 
 export const ProductForm: React.FC<ProductFormProps> = ({

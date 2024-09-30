@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect,  useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 interface CarouselProps {
   images: string[];
@@ -23,7 +24,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
-  },[setCurrentIndex, setDirection])
+  },[setCurrentIndex, setDirection, images.length]);
 
   // Auto slide every 30 seconds
   useEffect(() => {
@@ -75,14 +76,13 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
                 height: "100%", // Make sure the motion div takes full height
               }}
             >
-              <img
+              <Image
                 alt={`Carousel Image ${currentIndex + 1}`}
                 loading="lazy"
                 width="600"
                 height="200"
                 decoding="async"
                 className="h-full w-full object-cover"
-                srcSet={`${images[currentIndex]} 1x, ${images[currentIndex]} 2x`}
                 src={images[currentIndex]}
                 style={{ aspectRatio: "600 / 200" }}
               />

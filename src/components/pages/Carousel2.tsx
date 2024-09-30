@@ -22,7 +22,7 @@ const Carousel2: React.FC<CarouselProps> = ({ images }) => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
-  }, [setCurrentIndex, setDirection])
+  }, [setCurrentIndex, setDirection, images.length]);
 
   useEffect(() => {
     const interval = setInterval(handleNext, 30000);

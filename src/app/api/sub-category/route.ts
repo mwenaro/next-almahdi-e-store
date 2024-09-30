@@ -1,13 +1,14 @@
 import { dbCon } from "@/libs/mongoose/dbCon";
+import { Category } from "@/models/Category";
 import { SubCategory } from "@/models/SubCategory";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
 //GET  api/sub-category
 export async function GET(req: NextRequest) {
   try {
     await dbCon();
+    new Category();
     const fetchedSubCategories = await SubCategory.find({}).populate(
       "category"
     );
