@@ -1,5 +1,6 @@
 import { dbCon } from "@/libs/mongoose/dbCon";
 import { Category } from "@/models/Category";
+import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 //GET  api/category
@@ -31,6 +32,7 @@ export async function POST(req: NextRequest) {
         { sucess: false, message: "Could not create category" },
         { status: 400 }
       );
+      revalidatePath("/dashboard/categories");
 
     return NextResponse.json({ sucess: true, data: newCategory });
   } catch (error: any) {
