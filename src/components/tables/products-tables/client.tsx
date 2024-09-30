@@ -19,7 +19,7 @@ export const ProductClient: React.FC<ProductsClientProps> = ({ data }) => {
     <>
       <div className="flex items-start justify-between">
         <Heading
-          title={`SubCategories (${(data || []).length})`}
+          title={`Products (${(data || []).length})`}
           description="Manage products (Client side table functionalities.)"
         />
         <Button

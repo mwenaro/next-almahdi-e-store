@@ -14,8 +14,8 @@ const breadcrumbItems = [
 ];
 export default async function Page({params:{categoryId}}:any) {
   const initData = categoryId !== 'new' ? await Product.findById(categoryId): null
-  const categories = await Category.find().select(["_id", 'name'])
   const subCategories = await SubCategory.find().select(["_id", 'name', 'category'])
+  const categories = await Category.find().select(["_id", 'name'])
   return (
     <PageContainer scrollable={true}>
       <div className="space-y-4">

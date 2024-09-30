@@ -29,15 +29,35 @@ import {
 // import FileUpload from "@/components/FileUpload";
 import { useToast } from "../ui/use-toast";
 import { AlertModal } from "../modal/alert-modal";
+import FileUpload from "../file-upload";
+const ImgSchema = z.object({
+  fileName: z.string(),
+  name: z.string(),
+  fileSize: z.number(),
+  size: z.number(),
+  fileKey: z.string(),
+  key: z.string(),
+  fileUrl: z.string(),
+  url: z.string(),
+});
+export const IMG_MAX_LIMIT = 3;
 
 const productSchema = z.object({
-  name: z.string(),
-  // .min(3, { message: "product Name must be at least 3 characters" }),
-  category: z
+  name: z
     .string()
     .min(3, { message: "product Name must be at least 3 characters" }),
-
-  active: z.string(),
+  category: z.string(),
+  // .min(3, { message: "Category Name must be at least 3 characters" })
+  subCategory: z.string(),
+  // .min(3, { message: "product Name must be at least 3 characters" })
+  price: z.coerce.number().min(1, { message: "price must be at least 1" }),
+  description: z
+    .string()
+    .min(10, { message: "description must be at least 10 characters" }),
+  imgUrl: z
+    .array(ImgSchema)
+    .max(IMG_MAX_LIMIT, { message: "You can only add up to 3 images" })
+    .min(1, { message: "At least one image must be added." }),
 });
 
 type productFormValues = z.infer<typeof productSchema>;
@@ -46,34 +66,39 @@ interface productFormProps {
   initialData: any | null;
   categories: any;
   subCategories: any;
-  statusOptions:any
+  statusOptions: any;
 }
 
 export const ProductsForm: React.FC<productFormProps> = ({
   initialData,
   categories,
-  statusOptions
+  subCategories
 }) => {
   const params = useParams();
   const router = useRouter();
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [imgLoading, setImgLoading] = useState(false);
+  const[selectedCategory, setSelectedCategory] = useState<any>(null);
+  // const [imgUrl, setImgUrl] = useState<string>();
   const title = initialData ? "Edit product" : "Create product";
-  const description = initialData
-    ? "Edit a product."
-    : "Add a new product";
-  const toastMessage = initialData
-    ? "product updated."
-    : "product created.";
+  const description = initialData ? "Edit a product." : "Add a new product";
+  const toastMessage = initialData ? "product updated." : "product created.";
   const action = initialData ? "Save changes" : "Create";
+
 
   const defaultValues = initialData
     ? initialData
     : {
         name: "",
         active: "",
-        category:""
+        category: "",
+        subCategory: "",
+        status: "",
+        price: "",
+        description: "",
+        imgUrl: "",
       };
 
   const form = useForm<productFormValues>({
@@ -88,7 +113,7 @@ export const ProductsForm: React.FC<productFormProps> = ({
         await axios.put(`/api/product/${initialData._id}`, data);
       } else {
         const res = await axios.post(`/api/product`, data);
-        console.log({data, res})
+        console.log({ data, res });
       }
       router.refresh();
       router.push(`/dashboard/products`);
@@ -150,6 +175,24 @@ export const ProductsForm: React.FC<productFormProps> = ({
           <div className="gap-8 md:grid md:grid-cols-3">
             <FormField
               control={form.control}
+              name="imgUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Images</FormLabel>
+                  <FormControl>
+                    <FileUpload
+                      onChange={field.onChange}
+                      value={field.value}
+                      onRemove={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
@@ -165,7 +208,23 @@ export const ProductsForm: React.FC<productFormProps> = ({
                 </FormItem>
               )}
             />
-
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      placeholder="product description"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="category"
@@ -201,10 +260,10 @@ export const ProductsForm: React.FC<productFormProps> = ({
             />
             <FormField
               control={form.control}
-              name="active"
+              name="subCategory"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Status</FormLabel>
+                  <FormLabel>SubCategory</FormLabel>
                   <Select
                     disabled={loading}
                     onValueChange={field.onChange}
@@ -215,15 +274,15 @@ export const ProductsForm: React.FC<productFormProps> = ({
                       <SelectTrigger>
                         <SelectValue
                           defaultValue={field.value}
-                          placeholder="Select Status"
+                          placeholder="Select Category"
                         />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
                       {/* @ts-ignore  */}
-                      {statusOptions.map((status) => (
-                        <SelectItem key={status._id} value={status._id}>
-                          {status.name}
+                      {subCategories.map((subCategory) => (
+                        <SelectItem key={subCategory._id} value={subCategory._id}>
+                          {subCategory.name}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -232,6 +291,25 @@ export const ProductsForm: React.FC<productFormProps> = ({
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="price"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Price(Ksh)</FormLabel>
+                  <FormControl>
+                    <Input
+                      disabled={loading}
+                      placeholder="product price"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/*  */}
           </div>
           <Button disabled={loading} className="ml-auto" type="submit">
             {action}

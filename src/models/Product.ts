@@ -10,6 +10,7 @@ export interface IProduct extends Document {
   availability: boolean;
   trends: ('new arrival' | 'best selling' | 'featured' | 'flashsale')[];
   quantity: number;
+  imgUrl:string,
   image: {
     src: string;
   };
@@ -53,10 +54,14 @@ const productSchema = new Schema<IProduct>({
     type: Number,
     default: 1
   },
+  imgUrl: {
+    type: String,
+    // required: true
+  },
   image: {
     src: {
       type: String,
-      required: true
+      // required: true
     }
   }
 }, {
