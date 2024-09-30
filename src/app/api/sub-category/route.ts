@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
         { sucess: false, message: "Could not create Subcategory" },
         { status: 400 }
       );
-    revalidatePath("/dashboard/categories");
+    revalidatePath("/dashboard/sub-categories");
 
     return NextResponse.json({ sucess: true, data: newSubCategory });
   } catch (error: any) {
