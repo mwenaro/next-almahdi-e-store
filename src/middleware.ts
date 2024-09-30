@@ -6,7 +6,6 @@ export default withAuth(
   function middleware(req: NextRequest) {
     // Log the current request pathname for debugging
     const res = NextResponse.next();
-    // console.log({nextRRL: req.nextUrl.origin})
     // You can perform additional checks here if needed
     res.headers.set("x-url", req.nextUrl.origin);
     return res; // Continue if the user is authenticated
