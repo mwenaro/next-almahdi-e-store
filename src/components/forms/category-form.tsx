@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/select";
 // import FileUpload from "@/components/FileUpload";
 import { useToast } from "../ui/use-toast";
+import { AlertModal } from '../modal/alert-modal';
 
 const categorySchema = z.object({
   name: z
@@ -54,7 +55,6 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [imgLoading, setImgLoading] = useState(false);
   const title = initialData ? "Edit category" : "Create category";
   const description = initialData ? "Edit a category." : "Add a new category";
   const toastMessage = initialData ? "Category updated." : "Category created.";
@@ -76,7 +76,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
     try {
       setLoading(true);
       if (initialData) {
-        // await axios.post(`/api/category/edit-category/${initialData._id}`, data);
+        await axios.put(`/api/category/${initialData._id}`, data);
       } else {
         const res = await axios.post(`/api/category`, data);
       }
@@ -84,7 +84,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
       router.push(`/dashboard/categories`);
       toast({
         title: "Success",
-        description: "Category Successfully created",
+        description: toastMessage,
       });
     } catch (error: any) {
       toast({
@@ -100,7 +100,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
   const onDelete = async () => {
     try {
       setLoading(true);
-      //   await axios.delete(`/api/${params.storeId}/category/${params.categoryId}`);
+        await axios.delete(`/api/category/${params.categoryId}`);
       router.refresh();
       router.push(`/${params.storeId}/category`);
     } catch (error: any) {
@@ -113,12 +113,12 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
 
   return (
     <>
-      {/* <AlertModal
+      <AlertModal
         isOpen={open}
         onClose={() => setOpen(false)}
         onConfirm={onDelete}
         loading={loading}
-      /> */}
+      />
       <div className="flex items-center justify-between">
         <Heading title={title} description={description} />
         {initialData && (

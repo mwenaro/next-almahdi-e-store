@@ -1,12 +1,16 @@
 import { dbCon } from "@/libs/mongoose/dbCon";
 import { SubCategory } from "@/models/SubCategory";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
 //GET  api/sub-category
 export async function GET(req: NextRequest) {
   try {
-    await dbCon()
-    const fetchedSubCategories = await SubCategory.find({}).populate('category');
+    await dbCon();
+    const fetchedSubCategories = await SubCategory.find({}).populate(
+      "category"
+    );
     if (!fetchedSubCategories)
       return NextResponse.json(
         { sucess: false, message: "Not Found" },
@@ -22,7 +26,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    await dbCon()
+    await dbCon();
     const newSubCategory = await SubCategory.insertMany(
       Array.isArray(body) ? body : [body]
     );
@@ -31,6 +35,7 @@ export async function POST(req: NextRequest) {
         { sucess: false, message: "Could not create Subcategory" },
         { status: 400 }
       );
+    revalidatePath("/dashboard/categories");
 
     return NextResponse.json({ sucess: true, data: newSubCategory });
   } catch (error: any) {
