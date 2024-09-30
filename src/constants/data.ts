@@ -119,16 +119,16 @@ export const navItems: NavItem[] = [
     label: 'Dashboard'
   },
   {
-    title: 'Category',
-    href: '/dashboard/category',
+    title: 'Categories',
+    href: '/dashboard/categories',
     icon: 'user',
-    label: 'category'
+    label: 'categories'
   },
   {
-    title: 'SubCategory',
-    href: '/dashboard/sub-category',
+    title: 'SubCategories',
+    href: '/dashboard/sub-categories',
     icon: 'user',
-    label: 'sub-category'
+    label: 'sub-categories'
   },
   {
     title: 'Product',
