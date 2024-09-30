@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { IQuery } from "../../types";
 import { SubCategory } from "@/models/SubCategory";
+import { dbCon } from "@/libs/mongoose/dbCon";
 
 //GET  api/sub-category/slug
 export async function GET(req: NextRequest, { params: { slug } }: IQuery) {
   try {
+    await dbCon()
     const fetchedSubCategory = await SubCategory.findById(slug);
     if (!fetchedSubCategory)
       return NextResponse.json(
@@ -21,6 +23,7 @@ export async function GET(req: NextRequest, { params: { slug } }: IQuery) {
 export async function PUT(req: NextRequest, { params: { slug } }: IQuery) {
   try {
     const body = await req.json();
+    await dbCon()
     const updatedSubCategory = await SubCategory.findByIdAndUpdate(slug, body);
     if (!updatedSubCategory)
       return NextResponse.json(
@@ -36,6 +39,7 @@ export async function PUT(req: NextRequest, { params: { slug } }: IQuery) {
 
 export async function DELETE(req: NextRequest, { params: { slug } }: IQuery) {
   try {
+    await dbCon()
     const deletedSubCategory = await SubCategory.findByIdAndDelete(slug);
     if (!deletedSubCategory)
       return NextResponse.json(

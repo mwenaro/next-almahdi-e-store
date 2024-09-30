@@ -1,9 +1,11 @@
+import { dbCon } from "@/libs/mongoose/dbCon";
 import { Category } from "@/models/Category";
 import { NextRequest, NextResponse } from "next/server";
 
 //GET  api/category
 export async function GET(req: NextRequest) {
   try {
+    await dbCon()
     const fetchedCategorries = await Category.find({});
     if (!fetchedCategorries)
       return NextResponse.json(
@@ -19,8 +21,8 @@ export async function GET(req: NextRequest) {
 //POST /api/category
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  return NextResponse.json({body})
   try {
+    await dbCon()
     const newCategory = await Category.insertMany(
       Array.isArray(body) ? body : [body]
     );

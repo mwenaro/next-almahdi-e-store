@@ -1,9 +1,11 @@
+import { dbCon } from "@/libs/mongoose/dbCon";
 import { SubCategory } from "@/models/SubCategory";
 import { NextRequest, NextResponse } from "next/server";
 
 //GET  api/sub-category
 export async function GET(req: NextRequest) {
   try {
+    await dbCon()
     const fetchedSubCategories = await SubCategory.find({}).populate('category');
     if (!fetchedSubCategories)
       return NextResponse.json(
@@ -20,6 +22,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+    await dbCon()
     const newSubCategory = await SubCategory.insertMany(
       Array.isArray(body) ? body : [body]
     );
