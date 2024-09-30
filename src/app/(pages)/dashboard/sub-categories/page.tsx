@@ -1,3 +1,4 @@
+export const revalidate = 0
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import PageContainer from "@/components/layout/page-container";
 import { SubCategoryClient } from "@/components/tables/sub-category-tables/client";
@@ -22,7 +23,7 @@ const breadcrumbItems = [
 ];
 export default async function page() {
   const myData = await getSubCategories();
-  console.log({myData})
+  
 
   return (
     <PageContainer>
