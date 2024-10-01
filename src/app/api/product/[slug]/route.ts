@@ -35,7 +35,7 @@ export async function PUT(req: NextRequest, { params: { slug } }: IQuery) {
 
 export async function DELETE(req: NextRequest, { params: { slug } }: IQuery) {
   try {
-    const deletedProduct = await productService.getById(slug);
+    const deletedProduct = await productService.delete(slug);
     if (!deletedProduct)
       return NextResponse.json(
         { sucess: false, message: "Not Found" },

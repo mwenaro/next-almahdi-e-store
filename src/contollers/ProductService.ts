@@ -10,7 +10,7 @@ class ProductService extends Controller<IProduct> {
   async getPopullated() {
     new Category();
     new SubCategory();
-    return await this.model.find().populate("categoty").populate("subCategory");
+    return await this.model.find().populate("category").populate("subCategory");
   }
 }
 

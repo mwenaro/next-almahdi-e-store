@@ -1,12 +1,13 @@
-'use client';
-import { Checkbox } from '@/components/ui/checkbox';
-import { ColumnDef } from '@tanstack/react-table';
-import { CellAction } from './cell-action';
-import { IProduct } from '@/models/Product';
+"use client";
+import { Checkbox } from "@/components/ui/checkbox";
+import { ColumnDef } from "@tanstack/react-table";
+import { CellAction } from "./cell-action";
+import { IProduct } from "@/models/Product";
+import Image from "next/image";
 
 export const columns: ColumnDef<IProduct>[] = [
   {
-    id: 'select',
+    id: "select",
     header: ({ table }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
@@ -22,39 +23,54 @@ export const columns: ColumnDef<IProduct>[] = [
       />
     ),
     enableSorting: false,
-    enableHiding: false
+    enableHiding: false,
   },
   {
-    accessorKey: 'name',
-    header: 'PRODUCT'
+    accessorKey: "imgUrl",
+    header: "IMAGE",
+    cell: ({ row }) => (
+      <div className="flex justify-center items-center">
+        <Image
+          width={100}
+          height={100}
+          src={row.original.imgUrl}
+          alt={row.original.name}
+          className="w-16 h-16 object-cover"
+        />
+      </div>
+    ),
   },
   {
-    accessorKey: 'category.name',
-    header: 'CATEGORY'
+    accessorKey: "name",
+    header: "PRODUCT",
   },
   {
-    accessorKey: 'subCategory.name',
-    header: 'SUB CATEGORY'
+    accessorKey: "category.name",
+    header: "CATEGORY",
   },
   {
-    accessorKey: 'description',
-    header: 'DESCRIPTION'
+    accessorKey: "subCategory.name",
+    header: "SUB CATEGORY",
   },
   {
-    accessorKey: 'price',
-    header: 'PRICE'
+    accessorKey: "description",
+    header: "DESCRIPTION",
   },
   {
-    accessorKey: 'availability',
-    header: 'AVAILABILITY'
-  },
-  
-  {
-    accessorKey: 'active',
-    header: 'STATUS'
+    accessorKey: "price",
+    header: "PRICE",
   },
   {
-    id: 'actions',
-    cell: ({ row }) => <CellAction data={row.original} />
-  }
+    accessorKey: "availability",
+    header: "AVAILABILITY",
+  },
+
+  {
+    accessorKey: "active",
+    header: "STATUS",
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => <CellAction data={row.original} />,
+  },
 ];

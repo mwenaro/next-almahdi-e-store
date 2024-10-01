@@ -30,6 +30,8 @@ import {
 import { useToast } from "../ui/use-toast";
 import { AlertModal } from "../modal/alert-modal";
 import FileUpload from "../file-upload";
+import { UploadButton } from "@/libs/uploadthing";
+import FileUpload2 from "../file-upload2";
 const ImgSchema = z.object({
   fileName: z.string(),
   name: z.string(),
@@ -54,10 +56,10 @@ const productSchema = z.object({
   description: z
     .string()
     .min(10, { message: "description must be at least 10 characters" }),
-  imgUrl: z
-    .array(ImgSchema)
-    .max(IMG_MAX_LIMIT, { message: "You can only add up to 3 images" })
-    .min(1, { message: "At least one image must be added." }),
+  // images: z
+  //   .array(ImgSchema)
+  //   .max(IMG_MAX_LIMIT, { message: "You can only add up to 3 images" })
+    // .min(1, { message: "At least one image must be added." }),
 });
 
 type productFormValues = z.infer<typeof productSchema>;
@@ -72,7 +74,7 @@ interface productFormProps {
 export const ProductsForm: React.FC<productFormProps> = ({
   initialData,
   categories,
-  subCategories
+  subCategories,
 }) => {
   const params = useParams();
   const router = useRouter();
@@ -80,13 +82,12 @@ export const ProductsForm: React.FC<productFormProps> = ({
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(false);
-  const[selectedCategory, setSelectedCategory] = useState<any>(null);
-  // const [imgUrl, setImgUrl] = useState<string>();
+  const [selectedCategory, setSelectedCategory] = useState<any>(null);
+  const [images, setImages] = useState<{url:string, key:string}[]>([]);
   const title = initialData ? "Edit product" : "Create product";
   const description = initialData ? "Edit a product." : "Add a new product";
   const toastMessage = initialData ? "product updated." : "product created.";
   const action = initialData ? "Save changes" : "Create";
-
 
   const defaultValues = initialData
     ? initialData
@@ -95,10 +96,10 @@ export const ProductsForm: React.FC<productFormProps> = ({
         active: "",
         category: "",
         subCategory: "",
-        status: "",
         price: "",
         description: "",
-        imgUrl: "",
+        imgUrl:"",
+        images: [],
       };
 
   const form = useForm<productFormValues>({
@@ -106,13 +107,20 @@ export const ProductsForm: React.FC<productFormProps> = ({
     defaultValues,
   });
 
+ 
+
   const onSubmit = async (data: productFormValues) => {
+    console.log({ onSubmitData: data });
+    const formtedData = {
+      ...data, images:images.map(({key, url}:any)=>({url, key})), imgUrl:images[0]?.url || ''
+    }
+    // return alert(JSON.stringify(formtedData))c
     try {
       setLoading(true);
       if (initialData) {
-        await axios.put(`/api/product/${initialData._id}`, data);
+        await axios.put(`/api/product/${initialData._id}`, formtedData);
       } else {
-        const res = await axios.post(`/api/product`, data);
+        const res = await axios.post(`/api/product`, formtedData);
         console.log({ data, res });
       }
       router.refresh();
@@ -131,7 +139,10 @@ export const ProductsForm: React.FC<productFormProps> = ({
       setLoading(false);
     }
   };
-
+  function handleSetImages(data:any) {
+    setImages(data);
+    console.log({ dataOnChange: data });
+  }
   const onDelete = async () => {
     try {
       setLoading(true);
@@ -172,18 +183,19 @@ export const ProductsForm: React.FC<productFormProps> = ({
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-full space-y-8"
         >
-          <div className="gap-8 md:grid md:grid-cols-3">
+          <div className="gap-8 md:grid md:grid-cols-2">
             <FormField
-              control={form.control}
-              name="imgUrl"
+              // control={form.control}
+              name="images"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Images</FormLabel>
                   <FormControl>
+                    
                     <FileUpload
-                      onChange={field.onChange}
-                      value={field.value}
-                      onRemove={field.onChange}
+                      onChange={handleSetImages}
+                      value={images}
+                      onRemove={handleSetImages}
                     />
                   </FormControl>
                   <FormMessage />
@@ -281,7 +293,10 @@ export const ProductsForm: React.FC<productFormProps> = ({
                     <SelectContent>
                       {/* @ts-ignore  */}
                       {subCategories.map((subCategory) => (
-                        <SelectItem key={subCategory._id} value={subCategory._id}>
+                        <SelectItem
+                          key={subCategory._id}
+                          value={subCategory._id}
+                        >
                           {subCategory.name}
                         </SelectItem>
                       ))}

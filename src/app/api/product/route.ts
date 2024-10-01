@@ -12,7 +12,8 @@ export async function GET(req: NextRequest) {
   
       return NextResponse.json({ sucess: true, data: fetchedProducts });
     } catch (error: any) {
-      return NextResponse.json({ error: error }, { status: 500 });
+      console.log({message:error.message})
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }
 //POST /api/product
@@ -28,6 +29,8 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ sucess: true, data: newProduct });
   } catch (error: any) {
-    return NextResponse.json({ error: error }, { status: 500 });
+    console.log("Eoor from post prod, ", error.message)
+
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

@@ -9,14 +9,10 @@ const getProducts = async () => {
   const url = headers().get("x-url");
   const formatedUrl = `${url}/api/product`;
   console.log({ url, formatedUrl });
-  // const res = axios.get('')
-  // const url = process.env.__NEXT_PRIVATE_ORIGIN;
 
   const res = await axios.get(`${url}/api/product`);
-  // const res = await axios.get(`${process.env.NEXTAUTH_URL!}/api/product`)
-  // console.log(res.data.data)
-  // if(!res?.data?.length) return []
-  return await res?.data?.data || [];
+
+  return (await res?.data?.data) || [];
 };
 
 const breadcrumbItems = [
