@@ -1,3 +1,4 @@
+export const revalidate = 0
 import React from "react";
 import { ProductCard } from "./ProductCard";
 import { IProduct } from "@/models/Product";
