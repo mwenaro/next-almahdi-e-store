@@ -12,21 +12,25 @@ const breadcrumbItems = [
   { title: "Products", link: "/dashboard/products" },
   { title: "Create", link: "/dashboard/products/create" },
 ];
-export default async function Page({params:{categoryId}}:any) {
-  const initData = categoryId !== 'new' ? await Product.findById(categoryId): null
-  const subCategories = await SubCategory.find().select(["_id", 'name', 'category'])
-  const categories = await Category.find().select(["_id", 'name'])
+export default async function Page({ params: { categoryId } }: any) {
+  const initData =
+    categoryId !== "new" ? await Product.findById(categoryId) : null;
+  const [subCategories, categories] = await Promise.all([
+    SubCategory.find().select(["_id", "name", "category"]),
+    Category.find().select(["_id", "name"]),
+  ]);
+
   return (
     <PageContainer scrollable={true}>
       <div className="space-y-4">
         <Breadcrumbs items={breadcrumbItems} />
-        <ProductsForm 
+        <ProductsForm
           statusOptions={[
             { _id: false, name: "InActive" },
             { _id: true, name: "Active" },
           ]}
           categories={categories}
-          subCategories = {subCategories}
+          subCategories={subCategories}
           initialData={initData}
           key={null}
         />
