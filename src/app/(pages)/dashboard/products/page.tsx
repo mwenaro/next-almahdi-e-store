@@ -9,7 +9,7 @@ const breadcrumbItems = [
   { title: "Products", link: "/dashboard/products" },
 ];
 export default async function page() {
-  const myData = await getData('product');
+  const myData = await getData('/product');
 
   return (
     <PageContainer>
