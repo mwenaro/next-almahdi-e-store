@@ -48,6 +48,7 @@ export async function DELETE(req: NextRequest, { params: { slug } }: IQuery) {
         { status: 404 }
       );
     revalidatePath("/dashboard/categories");
+    revalidatePath("/dashboard/sub-categories");
 
     return NextResponse.json({ sucess: true, data: deletedCategory });
   } catch (error: any) {

@@ -22,7 +22,16 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   // console.log("In cell Action ", data);
-  const onConfirm = async () => {};
+  const onConfirm = async () => {
+    setLoading(true);
+    const res = await fetch(`/api/sub-category/${data._id}`, {
+      method: "DELETE",
+    });
+    await res.json();
+    router.refresh();
+    setLoading(false);
+    setOpen(false);
+  };
 
   return (
     <>
