@@ -59,7 +59,7 @@ const productSchema = z.object({
   // images: z
   //   .array(ImgSchema)
   //   .max(IMG_MAX_LIMIT, { message: "You can only add up to 3 images" })
-    // .min(1, { message: "At least one image must be added." }),
+  // .min(1, { message: "At least one image must be added." }),
 });
 
 type productFormValues = z.infer<typeof productSchema>;
@@ -83,7 +83,7 @@ export const ProductsForm: React.FC<productFormProps> = ({
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<any>(null);
-  const [images, setImages] = useState<{url:string, key:string}[]>([]);
+  const [images, setImages] = useState<{ url: string; key: string }[]>([]);
   const title = initialData ? "Edit product" : "Create product";
   const description = initialData ? "Edit a product." : "Add a new product";
   const toastMessage = initialData ? "product updated." : "product created.";
@@ -98,7 +98,7 @@ export const ProductsForm: React.FC<productFormProps> = ({
         subCategory: "",
         price: "",
         description: "",
-        imgUrl:"",
+        imgUrl: "",
         images: [],
       };
 
@@ -107,13 +107,13 @@ export const ProductsForm: React.FC<productFormProps> = ({
     defaultValues,
   });
 
- 
-
   const onSubmit = async (data: productFormValues) => {
     console.log({ onSubmitData: data });
     const formtedData = {
-      ...data, images:images.map(({key, url}:any)=>({url, key})), imgUrl:images[0]?.url || ''
-    }
+      ...data,
+      images: images.map(({ key, url }: any) => ({ url, key })),
+      imgUrl: images[0]?.url || "",
+    };
     // return alert(JSON.stringify(formtedData))c
     try {
       setLoading(true);
@@ -139,7 +139,7 @@ export const ProductsForm: React.FC<productFormProps> = ({
       setLoading(false);
     }
   };
-  function handleSetImages(data:any) {
+  function handleSetImages(data: any) {
     setImages(data);
     console.log({ dataOnChange: data });
   }
@@ -191,7 +191,6 @@ export const ProductsForm: React.FC<productFormProps> = ({
                 <FormItem>
                   <FormLabel>Images</FormLabel>
                   <FormControl>
-                    
                     <FileUpload
                       onChange={handleSetImages}
                       value={images}
@@ -270,42 +269,46 @@ export const ProductsForm: React.FC<productFormProps> = ({
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="subCategory"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>SubCategory</FormLabel>
-                  <Select
-                    disabled={loading}
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          defaultValue={field.value}
-                          placeholder="Select Category"
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {/* @ts-ignore  */}
-                      {subCategories.map((subCategory) => (
-                        <SelectItem
-                          key={subCategory._id}
-                          value={subCategory._id}
-                        >
-                          {subCategory.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {form.getValues().category.length ? (
+              <FormField
+                control={form.control}
+                name="subCategory"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>SubCategory</FormLabel>
+                    <Select
+                      disabled={loading}
+                      onValueChange={field.onChange}
+                      value={field.value}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue
+                            defaultValue={field.value}
+                            placeholder="Select Category"
+                          />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {/* @ts-ignore  */}
+                        {subCategories.filter(sb=>sb.category === form.getValues().category).map((subCategory) => (
+                          <SelectItem
+                            key={subCategory._id}
+                            value={subCategory._id}
+                          >
+                            {subCategory.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            ) : (
+              ""
+            )}
             <FormField
               control={form.control}
               name="price"
