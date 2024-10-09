@@ -6,6 +6,7 @@ import Header from "@/components/pages/Header";
 import ProductsSection from "@/components/pages/ProductsSection";
 import CategorySection from "@/components/pages/CategorySection3";
 import Carousel2 from "@/components/pages/Carousel2";
+// import { ProductList } from "@/components/pages/ProductList";
 
 const HomePage: React.FC = () => {
   const images = ["/assets/banner-default.jpg", "/assets/banner-default.jpg"];
@@ -42,6 +43,7 @@ const HomePage: React.FC = () => {
 
         {/* products */}
         <ProductsSection />
+        
       </main>
     </div>
   );

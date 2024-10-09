@@ -2,10 +2,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { ShoppingCartButton } from "./ShoppingCartButton";
 
 const Header: React.FC = () => {
   return (
-    <header className="bg-white border-b-2 text-foreground">
+    <>
+    <header className="bg-white border-b-2 text-foreground fixed w-full min-h-[100px]">
       <div className="container py-4 px-6 flex items-center justify-between">
         <Link className="flex items-center gap-2" href="/">
           <Image
@@ -26,30 +28,14 @@ const Header: React.FC = () => {
           <Link className="hover:underline font-bold" href="/backoffice">
             Admin
           </Link>
-          <Link className="relative font-bold" href="/cart">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-shopping-bag h-6 w-6 text-primary"
-            >
-              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4Z" />
-              <path d="M3 6h18" />
-              <path d="M16 10a4 4 0 01-8 0" />
-            </svg>
-            <span className="absolute -top-2 -right-2 font-bold bg-accent text-foreground rounded-full px-2 py-0.5 text-xs">
-              3
-            </span>
-          </Link>
+          <span className="relative font-bold" >
+            <ShoppingCartButton />
+          </span>
         </div>
       </div>
     </header>
+    <div className="mt-[100px]"></div>
+    </>
   );
 };
 

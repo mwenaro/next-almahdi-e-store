@@ -16,19 +16,19 @@ export default  function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = auth
+  // const session = auth
   return (
     
     <div className="flex">
       {/* <NextTopLoader showSpinner={false} /> */}
-        <Providers session={session}>
-          <Toaster />
+        {/* <Providers session={session}> */}
+          
       <Sidebar />
       <main className="w-full flex-1 overflow-hidden">
         <Header />
         {children}
       </main>
-      </Providers>
+      {/* </Providers> */}
     </div>
   );
 }

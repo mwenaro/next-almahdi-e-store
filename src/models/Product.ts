@@ -1,10 +1,12 @@
 import { Schema, model, models, Document, Types } from "mongoose";
+import { ICategory } from "./Category";
+import { ISubCategory } from "./SubCategory";
 
 // Define an interface for the Product document
 export interface IProduct extends Document {
   name: string;
-  category: Types.ObjectId;
-  subCategory: Types.ObjectId;
+  category: Types.ObjectId | ICategory;
+  subCategory: Types.ObjectId | ISubCategory;
   price: number;
   description?: string;
   availability: boolean;

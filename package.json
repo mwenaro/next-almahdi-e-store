@@ -56,6 +56,7 @@
     "react": "^18",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18",
+    "react-redux": "^9.1.2",
     "recharts": "^2.12.7",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
@@ -65,7 +66,9 @@
     "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
+    "@reduxjs/toolkit": "^2.2.8",
     "@types/bcryptjs": "^2.4.6",
+    "@types/next": "^8.0.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

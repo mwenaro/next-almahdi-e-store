@@ -3,18 +3,21 @@ import React from "react";
 import { ProductCard } from "./ProductCard";
 import { IProduct } from "@/models/Product";
 import { getData } from "@/libs/get-data";
+import { ProductList } from "./ProductList";
 
 export default async function ProductsSection() {
   const fetchedProducts = await getData("/product");
 
   const products = [
     {
+      _id:1,
       name: "Brake Pads",
       description: "High-performance brake pads for improved stopping power.",
       imgUrl: "/assets/TEXTAR BRAKE DISC.jpg",
       price: Math.random() * 1000,
     },
     {
+      _id:2,
       name: "Air Filter",
       description:
         "High-performance air filter for improved engine efficiency.",
@@ -22,12 +25,14 @@ export default async function ProductsSection() {
       price: Math.random() * 1000,
     },
     {
+      _id:3,
       name: "Oil Filter",
       description: "Premium oil filter for improved engine protection.",
       imgUrl: "/assets/TEXTAR BRAKE DISC.jpg",
       price: Math.random() * 1000,
     },
     {
+      _id:4,
       name: "Spark Plugs",
       description: "High-quality spark plugs for improved engine performance.",
       imgUrl: "/assets/TEXTAR BRAKE PADS.jpg",
@@ -49,13 +54,15 @@ export default async function ProductsSection() {
             <ProductCard
               key={index}
               image={prod.imgUrl}
-              title={prod.name}
+              name={prod.name}
               price={prod.price}
               description={prod.description!}
             />
           )
         )}
       </div>
+
+      <ProductList defaultProducts={products as any} />
     </div>
   );
 }
