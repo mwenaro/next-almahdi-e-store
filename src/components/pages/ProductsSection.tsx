@@ -15,7 +15,8 @@ export default async function ProductsSection() {
       description: "High-performance brake pads for improved stopping power.",
       imgUrl: "/assets/TEXTAR BRAKE DISC.jpg",
       price: Math.round(Math.random() * 1000),
-      category: { name: "textar" },
+      category: {_id:1, name: "textar" },
+      subCategory: { _id: 1, name: "Brake Pads", category: {_id:1, name: "textar" } },
     },
     {
       _id: 2,
@@ -24,7 +25,8 @@ export default async function ProductsSection() {
         "High-performance air filter for improved engine efficiency.",
       imgUrl: "/assets/TEXTAR BRAKE LINNINGS.jpg",
       price: Math.round(Math.random() * 1000),
-      category: { name: "super-textar" },
+      category: {_id:2, name: "super-textar" },
+      subCategory: { _id: 1, name: "Air Filter", category: {_id:2, name: "super-textar" } },
     },
     {
       _id: 3,
@@ -32,7 +34,8 @@ export default async function ProductsSection() {
       description: "Premium oil filter for improved engine protection.",
       imgUrl: "/assets/TEXTAR BRAKE DISC.jpg",
       price: Math.round(Math.random() * 1000),
-      category: { name: "textar" },
+      category: { _id:1,name: "textar" },
+      subCategory: { _id: 1, name: "Oil Filter", category: {_id:1, name: "textar" } },
     },
     {
       _id: 4,
@@ -40,7 +43,8 @@ export default async function ProductsSection() {
       description: "High-quality spark plugs for improved engine performance.",
       imgUrl: "/assets/TEXTAR BRAKE PADS.jpg",
       price: Math.round(Math.random() * 1000),
-      category: { name: "textar-2" },
+      category: { _id:3,name: "textar-2" },
+      subCategory: { _id: 1, name: "Spark Plugs", category: { _id:3,name: "textar-2" } },
     },
   ];
   fetchedProducts =

@@ -6,6 +6,7 @@ import Header from "@/components/pages/Header";
 import ProductsSection from "@/components/pages/ProductsSection";
 import CategorySection from "@/components/pages/CategorySection";
 import Carousel2 from "@/components/pages/Carousel2";
+import { SubCategorySection } from "@/components/pages/SubCategorySection";
 // import { ProductList } from "@/components/pages/ProductList";
 
 const HomePage: React.FC = () => {
@@ -20,6 +21,8 @@ const HomePage: React.FC = () => {
         
         {/* Categoty Section */}
         <CategorySection />
+        {/* sub-category Section */}
+        {/* <SubCategorySection /> */}
 
         {/* products */}
         <ProductsSection />

@@ -5,6 +5,7 @@ import { RootState } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
+import { SubCategorySection } from "./SubCategorySection";
 
 
 export default function CategorySection() {
@@ -20,6 +21,7 @@ export default function CategorySection() {
   
 
   return (
+    <>
     <div className="w-ful  container px-4 block overflow-x-scroll">
         <h2 className="text-xl md:text-2xl font-bold py-2">Shop by Category</h2>
 
@@ -53,5 +55,7 @@ export default function CategorySection() {
       </div>
 
     </div>
+    <SubCategorySection />
+    </>
   );
 }
