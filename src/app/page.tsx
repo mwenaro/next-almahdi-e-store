@@ -12,7 +12,7 @@ const HomePage: React.FC = () => {
   const images = ["/assets/banner-default.jpg", "/assets/banner-default.jpg"];
 
   return (
-    <div className="flex flex-col gap-4 ">
+    <div className="flex flex-col gap-2 md:gap-4 ">
       <Header />
       {/* <Carousel images={images} /> */}
       <Carousel2 images={images} />

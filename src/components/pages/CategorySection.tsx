@@ -20,10 +20,10 @@ export default function CategorySection() {
   
 
   return (
-    <div className="container px-4 block">
+    <div className="w-ful  container px-4 block overflow-x-scroll">
         <h2 className="text-xl md:text-2xl font-bold py-4">Shop by Category</h2>
 
-      <div className="p-5 gap-2 flex">
+      <div className="w-full p2 md:p-5 gap-2 flex flex-wrap">
         {categories.map((category: string) => {
           // if (category === "all")
           //   return (
@@ -42,7 +42,7 @@ export default function CategorySection() {
               key={category}
               onClick={() => handleFilter(category)}
               className={cn(
-                "capitalize bg-slate-200 text-blue-600",
+                "capitalize bg-slate-200 text-blue-600 w-5/12 sm:w-fit",
                 activeCategory == category ? "bg-red-600 text-white" : ""
               )}
             >
