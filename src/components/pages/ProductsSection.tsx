@@ -15,6 +15,7 @@ export default async function ProductsSection() {
       description: "High-performance brake pads for improved stopping power.",
       imgUrl: "/assets/TEXTAR BRAKE DISC.jpg",
       price: Math.random() * 1000,
+      category:{name:'textar'}
     },
     {
       _id:2,
@@ -23,6 +24,7 @@ export default async function ProductsSection() {
         "High-performance air filter for improved engine efficiency.",
       imgUrl: "/assets/TEXTAR BRAKE LINNINGS.jpg",
       price: Math.random() * 1000,
+      category:{name:'super-textar'}
     },
     {
       _id:3,
@@ -30,6 +32,7 @@ export default async function ProductsSection() {
       description: "Premium oil filter for improved engine protection.",
       imgUrl: "/assets/TEXTAR BRAKE DISC.jpg",
       price: Math.random() * 1000,
+      category:{name:'textar'}
     },
     {
       _id:4,
@@ -37,6 +40,7 @@ export default async function ProductsSection() {
       description: "High-quality spark plugs for improved engine performance.",
       imgUrl: "/assets/TEXTAR BRAKE PADS.jpg",
       price: Math.random() * 1000,
+      category:{name:'textar-2'}
     },
   ];
 

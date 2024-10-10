@@ -1,6 +1,6 @@
 "use client";
 // ProductList.tsx
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import { RootState } from './store';
 // import { filterProducts, resetFilter } from './store/features/productSlice';
@@ -10,9 +10,12 @@ import {
   filterProducts,
   resetFilter,
   setProducts,
+  setActiveCategory,
 } from "@/store/features/productSlice";
 import { IProduct } from "@/models/Product";
 import { ProductCard } from "./ProductCard";
+import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
 // import { addToCart } from './features/cartSlice';
 interface ProductListProps {
   defaultProducts?: IProduct[];
@@ -22,14 +25,19 @@ export const ProductList: React.FC<ProductListProps> = ({
   defaultProducts = [],
 }) => {
   const dispatch = useDispatch();
-  const { products, filteredProducts } = useSelector(
+  const { activeCategory, products, filteredProducts } = useSelector(
     (state: RootState) => state.products
   );
 
   useEffect(() => {
     if (!products.length) dispatch(setProducts(defaultProducts));
   }, []);
-  
+
+  useEffect(() => {}, [setActiveCategory]);
+  const handleSetActiveCategory = (category: string) => {
+    dispatch(setActiveCategory(category));
+  };
+
   const handleAddToCart = (product: any) => {
     dispatch(addToCart(product));
     console.log({ product });
@@ -38,14 +46,41 @@ export const ProductList: React.FC<ProductListProps> = ({
   const handleFilter = (category: string) => {
     dispatch(filterProducts(category));
   };
-
+  const categories = Array.from(
+    new Set([
+      "all",
+      ...defaultProducts.map((p: any) => p?.category?.name || "textar"),
+    ])
+  );
   return (
     <div>
-      <button onClick={() => handleFilter("Electronics")}>
-        Filter Electronics
-      </button>
-      <button onClick={() => handleFilter("Clothing")}>Filter Clothing</button>
-      <button onClick={() => dispatch(resetFilter())}>Reset Filter</button>
+      <div className="p-5 gap-2 flex">
+        {categories.map((category: string) => {
+          // if (category === "all")
+          //   return (
+          //     <Button
+          //       onClick={() => dispatch(resetFilter())}
+          //       className={cn(
+          //         activeCategory === category ? "bg-red-600 text-white" : "",
+          //         "capitalize bg-slate-200"
+          //       )}
+          //     >
+          //       All
+          //     </Button>
+          //   );
+          return (
+            <Button
+              onClick={() => handleFilter(category)}
+              className={cn(
+                "capitalize bg-slate-200",
+                activeCategory == category ? "bg-red-600 text-white" : ""
+              )}
+            >
+              {category}
+            </Button>
+          );
+        })}
+      </div>
 
       <h2>Products</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

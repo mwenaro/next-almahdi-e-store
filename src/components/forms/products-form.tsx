@@ -32,6 +32,7 @@ import { AlertModal } from "../modal/alert-modal";
 import FileUpload from "../file-upload";
 import { UploadButton } from "@/libs/uploadthing";
 import FileUpload2 from "../file-upload2";
+import { ISubCategory } from "@/models/SubCategory";
 const ImgSchema = z.object({
   fileName: z.string(),
   name: z.string(),
@@ -141,7 +142,6 @@ export const ProductsForm: React.FC<productFormProps> = ({
   };
   function handleSetImages(data: any) {
     setImages(data);
-    console.log({ dataOnChange: data });
   }
   const onDelete = async () => {
     try {
@@ -292,14 +292,19 @@ export const ProductsForm: React.FC<productFormProps> = ({
                       </FormControl>
                       <SelectContent>
                         {/* @ts-ignore  */}
-                        {subCategories.filter(sb=>sb.category === form.getValues().category).map((subCategory) => (
-                          <SelectItem
-                            key={subCategory._id}
-                            value={subCategory._id}
-                          >
-                            {subCategory.name}
-                          </SelectItem>
-                        ))}
+                        {subCategories
+                          .filter(
+                            (sc: any) =>
+                              sc.category === form.getValues().category
+                          )
+                          .map((subCategory:any) => (
+                            <SelectItem
+                              key={subCategory._id}
+                              value={subCategory._id}
+                            >
+                              {subCategory.name}
+                            </SelectItem>
+                          ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />
