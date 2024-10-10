@@ -19,10 +19,13 @@ import { cn } from "@/lib/utils";
 // import { addToCart } from './features/cartSlice';
 interface ProductListProps {
   defaultProducts?: IProduct[];
+  sectionTitle?: string;
+  children?: React.ReactNode;
 }
 
 export const ProductList: React.FC<ProductListProps> = ({
   defaultProducts = [],
+  sectionTitle,
 }) => {
   const dispatch = useDispatch();
   const { activeCategory, products, filteredProducts } = useSelector(
@@ -34,56 +37,22 @@ export const ProductList: React.FC<ProductListProps> = ({
   }, []);
 
   useEffect(() => {}, [setActiveCategory]);
-  const handleSetActiveCategory = (category: string) => {
-    dispatch(setActiveCategory(category));
-  };
+  // const handleSetActiveCategory = (category: string) => {
+  //   dispatch(setActiveCategory(category));
+  // };
 
   const handleAddToCart = (product: any) => {
     dispatch(addToCart(product));
-    console.log({ product });
+    // console.log({ product });
   };
   filteredProducts;
-  const handleFilter = (category: string) => {
-    dispatch(filterProducts(category));
-  };
-  const categories = Array.from(
-    new Set([
-      "all",
-      ...defaultProducts.map((p: any) => p?.category?.name || "textar"),
-    ])
-  );
+  
+  ;
   return (
     <div>
-      <div className="p-5 gap-2 flex">
-        {categories.map((category: string) => {
-          // if (category === "all")
-          //   return (
-          //     <Button
-          //       onClick={() => dispatch(resetFilter())}
-          //       className={cn(
-          //         activeCategory === category ? "bg-red-600 text-white" : "",
-          //         "capitalize bg-slate-200"
-          //       )}
-          //     >
-          //       All
-          //     </Button>
-          //   );
-          return (
-            <Button
-            key={category}
-              onClick={() => handleFilter(category)}
-              className={cn(
-                "capitalize bg-slate-200 text-blue-600",
-                activeCategory == category ? "bg-red-600 text-white" : ""
-              )}
-            >
-              {category}
-            </Button>
-          );
-        })}
-      </div>
+          
+      <h2 className="text-2xl font-bold py-4">{sectionTitle? sectionTitle : 'Featured Products'}</h2>
 
-      <h2>Products</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {(filteredProducts.length > 0 ? filteredProducts : products).map(
           (prod: IProduct, index) => (

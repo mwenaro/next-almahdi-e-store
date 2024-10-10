@@ -4,7 +4,7 @@ import React from "react";
 import Header from "@/components/pages/Header";
 
 import ProductsSection from "@/components/pages/ProductsSection";
-import CategorySection from "@/components/pages/CategorySection3";
+import CategorySection from "@/components/pages/CategorySection";
 import Carousel2 from "@/components/pages/Carousel2";
 // import { ProductList } from "@/components/pages/ProductList";
 
@@ -17,27 +17,7 @@ const HomePage: React.FC = () => {
       {/* <Carousel images={images} /> */}
       <Carousel2 images={images} />
       <main className="flex-1 bg-white">
-        {/* <div className="container px-4 md:px-6 py-8">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold">Shop by Category</h2>
-            <a className="text-primary hover:underline" href="#">
-              View All
-            </a>
-          </div>
-          <div className="overflow-x-auto">
-            <div className="flex gap-4 py-2">
-              {categories.map(({ category, icon }, index) => (
-                <Category
-                  icon={
-                    <Image src={icon} alt={category} width={50} height={50} />
-                  }
-                  label={category}
-                  href="#"
-                />
-              ))}
-            </div>
-          </div>
-        </div> */}
+        
         {/* Categoty Section */}
         <CategorySection />
 

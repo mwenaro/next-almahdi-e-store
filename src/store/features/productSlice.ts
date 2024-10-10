@@ -7,12 +7,14 @@ interface ProductState {
   products: IProduct[];
   filteredProducts: IProduct[];
   activeCategory: string;
+  productCategories:string[]
 }
 
 const initialState: ProductState = {
   products: [],
   filteredProducts: [],
   activeCategory: "all",
+  productCategories: []
 };
 
 const productSlice = createSlice({
@@ -22,6 +24,14 @@ const productSlice = createSlice({
     setProducts: (state, action: PayloadAction<any[]>) => {
       state.products = action.payload;
       state.filteredProducts = action.payload;
+      state.productCategories = Array.from(
+        new Set([
+          "all",
+          ...state.products
+            .map((p: any) => p?.category?.name)
+            .filter((category) => category),
+        ])
+      );
     },
     filterProducts: (state, action: PayloadAction<string>) => {
       const category = action.payload;

@@ -86,7 +86,7 @@ export function ShoppingCartButton() {
                     <div className="flex items-center">
                       <span className="font-medium">{item.name}</span>
                       <span className="ml-2 text-gray-500">
-                        - Ksh {Math.round(item.price)} x {item.quantity}
+                        - Ksh {+item.price.toFixed(2)} x {item.quantity}
                       </span>
                     </div>
                     <div className="flex items-center space-x-2">
