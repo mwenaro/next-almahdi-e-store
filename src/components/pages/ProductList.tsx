@@ -73,7 +73,7 @@ export const ProductList: React.FC<ProductListProps> = ({
             key={category}
               onClick={() => handleFilter(category)}
               className={cn(
-                "capitalize bg-slate-200",
+                "capitalize bg-slate-200 text-blue-600",
                 activeCategory == category ? "bg-red-600 text-white" : ""
               )}
             >
