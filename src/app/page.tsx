@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
       <Header />
       {/* <Carousel images={images} /> */}
       <Carousel2 images={images} />
-      <main className="flex-1 bg-white">
+      <main className="flex-1 bg-white ">
         
         {/* Categoty Section */}
         <CategorySection />

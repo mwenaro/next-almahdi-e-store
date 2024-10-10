@@ -7,7 +7,7 @@ import { ShoppingCartButton } from "./ShoppingCartButton";
 const Header: React.FC = () => {
   return (
     <>
-    <header className="bg-white border-b-2 text-foreground fixed w-full min-h-[100px]">
+    <header className="bg-white border-b-2 text-foreground fixed w-full overflow-hidden min-h-[100px]">
       <div className="container py-4 px-6 flex items-center justify-between">
         <Link className="flex items-center gap-2" href="/">
           <Image

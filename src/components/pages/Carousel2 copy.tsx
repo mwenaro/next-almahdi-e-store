@@ -47,8 +47,10 @@ const Carousel2: React.FC<CarouselProps> = ({ images }) => {
   };
 
   return (
-    <section className="w-full h-fit overflow-hidden bg-gray-900">
-      <div className="relative w-full h-[10vh] sm:h-[17vh] md:h-[20vh] lg:h-[30vh] xl:h-[60vh] overflow-hidden">
+    <section className="w-full  h-fit overflow-hidden bg-red-600">
+      {/* Adjust the height based on screen size */}
+      {/* <div className="relative w-full  sm:h-[40vh] md:h-[60vh] lg:h-[70vh] xl:h-[80vh] overflow-hidden"> */}
+      <div className="relative w-full   overflow-hidden bg-blue-600">
         <div className="overflow-hidden h-full">
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
@@ -64,10 +66,11 @@ const Carousel2: React.FC<CarouselProps> = ({ images }) => {
                 opacity: { duration: 0.2 },
               }}
             >
+              {/* Make image responsive with correct layout */}
               <Image
                 alt={`Carousel Image ${currentIndex + 1}`}
                 src={images[currentIndex]}
-                width={1920}
+                width={1920} // Larger width to cover bigger screens
                 height={1080}
                 className="object-cover w-full h-full"
                 layout="responsive"
@@ -78,13 +81,13 @@ const Carousel2: React.FC<CarouselProps> = ({ images }) => {
         {/* Responsive button styles */}
         <button
           onClick={handlePrev}
-          className="absolute  left-4 top-1/2 -translate-y-1/2 bg-white p-2 sm:p-3 md:p-4 lg:p-5 rounded-full z-10 hidden sm:block hover:bg-gray-200 transition-all"
+          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white p-2 sm:p-3 md:p-4 lg:p-5 rounded-full z-10 hidden sm:block"
         >
           Prev
         </button>
         <button
           onClick={handleNext}
-          className="absolute  right-4 top-1/2 -translate-y-1/2 bg-white p-2 sm:p-3 md:p-4 lg:p-5 rounded-full z-10 hidden sm:block hover:bg-gray-200 transition-all"
+          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white p-2 sm:p-3 md:p-4 lg:p-5 rounded-full z-10 hidden sm:block"
         >
           Next
         </button>

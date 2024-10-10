@@ -49,11 +49,11 @@ export const ProductList: React.FC<ProductListProps> = ({
   
   ;
   return (
-    <div>
+    <div className="w-full">
           
       <h2 className="text-2xl font-bold py-4">{sectionTitle? sectionTitle : 'Featured Products'}</h2>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-6">
         {(filteredProducts.length > 0 ? filteredProducts : products).map(
           (prod: IProduct, index) => (
             <ProductCard
