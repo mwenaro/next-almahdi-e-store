@@ -70,6 +70,7 @@ export const ProductList: React.FC<ProductListProps> = ({
           //   );
           return (
             <Button
+            key={category}
               onClick={() => handleFilter(category)}
               className={cn(
                 "capitalize bg-slate-200",
