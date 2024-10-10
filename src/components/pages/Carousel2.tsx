@@ -47,9 +47,9 @@ const Carousel2: React.FC<CarouselProps> = ({ images }) => {
   };
 
   return (
-    <section className="w-full h-fit overflow-hidden bg-gray-900">
+    <section className="w-full h-fit overflow-hidden ">
       <div className="relative w-full h-[10vh] sm:h-[17vh] md:h-[20vh] lg:h-[30vh] xl:h-[60vh] overflow-hidden">
-        <div className="overflow-hidden h-full">
+        {/* <div className="overflow-hidden h-full"> */}
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
               key={currentIndex}
@@ -69,12 +69,12 @@ const Carousel2: React.FC<CarouselProps> = ({ images }) => {
                 src={images[currentIndex]}
                 width={1920}
                 height={1080}
-                className="object-cover w-full h-full"
+                className="object-cover w-full "
                 layout="responsive"
               />
             </motion.div>
           </AnimatePresence>
-        </div>
+        {/* </div> */}
         {/* Responsive button styles */}
         <button
           onClick={handlePrev}
