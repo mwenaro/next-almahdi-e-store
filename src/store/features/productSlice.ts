@@ -29,6 +29,7 @@ const productSlice = createSlice({
     setProducts: (state, action: PayloadAction<any[]>) => {
       state.products = action.payload;
       state.filteredProducts = action.payload;
+      state.productCategories = []
       state.productCategories = Array.from(
         new Set([
           "all",
@@ -45,6 +46,7 @@ const productSlice = createSlice({
       state.activeSubCategory = "all"; // Reset subcategory when category changes
       
       if (category === "all") {
+        state.productSubCategories = []
         state.filteredProducts = state.products;
       } else {
         state.filteredProducts = state.products.filter(
@@ -68,6 +70,7 @@ const productSlice = createSlice({
       state.activeSubCategory = subCategory;
 
       if (state.activeCategory === "all") {
+        state.productCategories = []
         state.filteredProducts = state.products;
       } else if (state.activeSubCategory === "all") {
         // If only category is active, ignore subcategory
